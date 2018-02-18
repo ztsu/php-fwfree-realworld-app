@@ -1,0 +1,38 @@
+{
+    "name": "ztsu/php-fw-free-realword-example-app",
+    "description": "Framewrok free implementation of RealWorld Example App backend",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexey Golovnya",
+            "email": "alexey.golovnya@gmail.com"
+        }
+    ],
+    "require": {
+        "ztsu/reacon": "dev-master",
+        "nikic/fast-route": "^1.2",
+        "fig/http-message-util": "^1.1",
+        "zendframework/zend-diactoros": "^1.5",
+        "league/container": "^2.4",
+        "psr/container": "^1.0",
+        "firebase/php-jwt": "^5.0",
+        "psr/http-server-handler": "^1.0",
+        "psr/http-server-middleware": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "Realworld\\App\\": "src/App/",
+          "Realworld\\Domain\\": "src/Domain/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.3",
+        "doctrine/instantiator": "1.0.5"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Realworld\\": "tests/"
+        }
+    }
+}
