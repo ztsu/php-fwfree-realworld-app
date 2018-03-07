@@ -32,12 +32,10 @@ class App
     public function __construct(ContainerInterface $container)
     {
         $this->requestHandler = new Reacon(
-            [
-                new HandleErrorMiddleware(),
-                new ParseJsonMiddleware(),
-                new AuthMiddleware($container->get(TokenService::class)),
-                new DispatcherMiddleware($container->get(HandlerFactory::class)),
-            ]
+            new HandleErrorMiddleware(),
+            new ParseJsonMiddleware(),
+            new AuthMiddleware($container->get(TokenService::class)),
+            new DispatcherMiddleware($container->get(HandlerFactory::class))
         );
     }
 

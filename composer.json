@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "ztsu/reacon": "dev-master",
+        "ztsu/reacon": "^1.0",
         "nikic/fast-route": "^1.2",
         "fig/http-message-util": "^1.1",
         "zendframework/zend-diactoros": "^1.5",
