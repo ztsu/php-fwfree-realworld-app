@@ -6,12 +6,12 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Realworld\App\Authentication\TokenService;
 use Realworld\App\Handler\HandlerFactory;
 use Realworld\App\Middleware\AuthMiddleware;
 use Realworld\App\Middleware\DispatcherMiddleware;
 use Realworld\App\Middleware\HandleErrorMiddleware;
 use Realworld\App\Middleware\ParseJsonMiddleware;
+use Realworld\Domain\Service\AuthTokenCoderServiceInterface;
 use Ztsu\Reacon\Reacon;
 
 /**
@@ -34,7 +34,7 @@ class App
         $this->requestHandler = new Reacon(
             new HandleErrorMiddleware(),
             new ParseJsonMiddleware(),
-            new AuthMiddleware($container->get(TokenService::class)),
+            new AuthMiddleware($container->get(AuthTokenCoderServiceInterface::class)),
             new DispatcherMiddleware($container->get(HandlerFactory::class))
         );
     }

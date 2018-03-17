@@ -1,8 +1,8 @@
 <?php
 
-namespace Realworld\App\Repository;
+namespace Realworld\Infrastructure\Repository;
 
-use Realworld\Domain\Exception\User\FollowingNotFoundException;
+use Realworld\Domain\Exception\FollowingNotFoundException;
 use Realworld\Domain\Model\Following;
 use Realworld\Domain\Repository\FollowingsRepositoryInterface;
 

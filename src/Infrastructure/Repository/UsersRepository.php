@@ -1,10 +1,10 @@
 <?php
 
-namespace Realworld\App\Repository;
+namespace Realworld\Infrastructure\Repository;
 
 use Realworld\Domain\Model\User;
 use Realworld\Domain\Repository\UsersRepositoryInterface;
-use Realworld\Domain\Service\User\UserNotFoundException;
+use Realworld\Domain\Exception\UserNotFoundException;
 
 /**
  * Repository for users (implementation)
@@ -26,9 +26,9 @@ class UsersRepository implements UsersRepositoryInterface
 
     /**
      * @param User $user
-     * @return int
+     * @return User
      */
-    public function add(User $user): int
+    public function add(User $user): User
     {
         $statement = $this->db->prepare(
             "INSERT INTO `users` (`name`, `email`, `password`, `bio`, `image`) VALUES (?, ?, ?, ?, ?)"
@@ -36,7 +36,16 @@ class UsersRepository implements UsersRepositoryInterface
 
         $statement->execute([$user->name, $user->email, $user->passwordHash, $user->bio, $user->image]);
 
-        return (int)$this->db->lastInsertId();
+        $id = $this->db->lastInsertId();
+
+        return new User(
+            $id,
+            $user->name,
+            $user->email,
+            $user->passwordHash,
+            $user->bio,
+            $user->image
+        );
     }
 
     /**

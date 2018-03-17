@@ -1,13 +1,15 @@
 <?php
 
-namespace Realworld\App\Authentication;
+namespace Realworld\Infrastructure\Service;
 
 use Firebase\JWT\JWT;
+use Realworld\Domain\Model\UserAuthToken;
+use Realworld\Domain\Service\AuthTokenCoderServiceInterface;
 
 /**
  * Encodes and decodes AuthToken with JWT
  */
-class TokenService
+class AuthTokenCoderService implements AuthTokenCoderServiceInterface
 {
     const ALG = "HS256";
 
@@ -32,10 +34,10 @@ class TokenService
     }
 
     /**
-     * @param AuthToken $token
+     * @param UserAuthToken $token
      * @return string
      */
-    public function encode(AuthToken $token): string
+    public function encode(UserAuthToken $token): string
     {
         return $this->firebase::encode(
             [
@@ -49,12 +51,12 @@ class TokenService
 
     /**
      * @param string $encodedToken
-     * @return AuthToken
+     * @return UserAuthToken
      */
-    public function decode(string $encodedToken): AuthToken
+    public function decode(string $encodedToken): UserAuthToken
     {
         $token = $this->firebase::decode($encodedToken, $this->privateKey, [self::ALG]);
 
-        return new AuthToken($token->name, $token->sub);
+        return new UserAuthToken($token->name, $token->sub);
     }
 }

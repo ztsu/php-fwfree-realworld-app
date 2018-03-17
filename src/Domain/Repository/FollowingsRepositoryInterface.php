@@ -2,7 +2,7 @@
 
 namespace Realworld\Domain\Repository;
 
-use Realworld\Domain\Exception\User\FollowingNotFoundException;
+use Realworld\Domain\Exception\FollowingNotFoundException;
 use Realworld\Domain\Model\Following;
 
 /**

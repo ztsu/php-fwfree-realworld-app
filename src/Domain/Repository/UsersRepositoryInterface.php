@@ -9,7 +9,7 @@ use Realworld\Domain\Model\User;
  */
 interface UsersRepositoryInterface
 {
-    public function add(User $user): int;
+    public function add(User $user): User;
 
     public function getUserByEmail(string $email): User;
 

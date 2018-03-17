@@ -6,7 +6,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Realworld\App\Authentication\TokenService;
+use Realworld\Infrastructure\Service\AuthTokenCoderService;
+use Realworld\Domain\Service\AuthTokenCoderServiceInterface;
 
 /**
  * Authenticates request with Authorization header
@@ -15,9 +16,12 @@ class AuthMiddleware implements MiddlewareInterface
 {
     const ATTR_NAME = "auth_token";
 
+    /**
+     * @var AuthTokenCoderServiceInterface
+     */
     private $service;
 
-    public function __construct(TokenService $service)
+    public function __construct(AuthTokenCoderServiceInterface $service)
     {
         $this->service = $service;
     }

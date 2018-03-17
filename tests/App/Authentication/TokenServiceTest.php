@@ -4,8 +4,8 @@ namespace Realworld\App\Authentication;
 
 use Firebase\JWT\JWT;
 use PHPUnit\Framework\TestCase;
-use Realworld\App\Authentication\AuthToken;
-use Realworld\App\Authentication\TokenService;
+use Realworld\Domain\Model\UserAuthToken;
+use Realworld\Infrastructure\Service\AuthTokenCoderService;
 use Realworld\Domain\Model\User;
 
 class TokenServiceTest extends TestCase
@@ -39,9 +39,9 @@ ehde/zUxo6UvS7UrBQIDAQAB
 -----END PUBLIC KEY-----
 EOD;
 
-        $service = new TokenService(new JWT(), $privateKey, $publicKey);
+        $service = new AuthTokenCoderService(new JWT(), $privateKey, $publicKey);
 
-        $token = AuthToken::create(new User(1, "Test", "test@example.org", "", "", ""));
+        $token = UserAuthToken::create(new User(1, "Test", "test@example.org", "", "", ""));
 
         $jwt = $service->encode($token);
 

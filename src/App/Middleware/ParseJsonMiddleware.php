@@ -8,7 +8,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
- * Parses body of requests as JSON
+ * Parses body of a request as JSON
  */
 class ParseJsonMiddleware implements MiddlewareInterface
 {

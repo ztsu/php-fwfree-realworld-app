@@ -1,8 +1,9 @@
 <?php
 
-namespace Realworld\Domain\Service\User;
+namespace Realworld\Domain\Service;
 
 use Realworld\Domain\Model\User;
+use Realworld\Domain\Exception\UserAlreadyExistsException;
 use Realworld\Domain\Repository\UsersRepositoryInterface;
 
 /**
@@ -37,15 +38,6 @@ class CreateUserService
             throw new UserAlreadyExistsException("User `{$user->name}` already exists");
         }
 
-        $id = $this->repository->add($user);
-
-        return new User(
-            $id,
-            $user->name,
-            $user->email,
-            $user->passwordHash,
-            $user->bio,
-            $user->image
-        );
+        return $this->repository->add($user);
     }
 }

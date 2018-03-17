@@ -4,16 +4,17 @@ namespace Realworld\App;
 
 use Firebase\JWT\JWT;
 use League\Container\ServiceProvider\AbstractServiceProvider;
-use Realworld\App\Authentication\TokenService;
+use Realworld\Infrastructure\Service\AuthTokenCoderService;
 use Realworld\App\Handler\HandlerFactory;
-use Realworld\App\Repository\FollowingsRepository;
-use Realworld\App\Repository\UsersRepository;
+use Realworld\Infrastructure\Repository\FollowingsRepository;
+use Realworld\Infrastructure\Repository\UsersRepository;
 use Realworld\Domain\Repository\FollowingsRepositoryInterface;
 use Realworld\Domain\Repository\UsersRepositoryInterface;
-use Realworld\Domain\Service\User\AuthenticateUserByPasswordService;
-use Realworld\Domain\Service\User\CheckUserFollowedByUserService;
-use Realworld\Domain\Service\User\CreateUserService;
-use Realworld\Domain\Service\User\FollowUserByUsernameService;
+use Realworld\Domain\Service\AuthenticateUserByPasswordService;
+use Realworld\Domain\Service\AuthTokenCoderServiceInterface;
+use Realworld\Domain\Service\CheckUserFollowedByUserService;
+use Realworld\Domain\Service\CreateUserService;
+use Realworld\Domain\Service\FollowUserByUsernameService;
 use Zend\Diactoros\Response\SapiEmitter;
 
 /**
@@ -52,8 +53,8 @@ class ServiceProvider extends AbstractServiceProvider
                 return new \PDO("mysql:dbname=realworld;host=127.0.0.1;port=3306", "root", "");
             },
 
-            TokenService::class => function() use ($config) {
-                return new TokenService(new JWT, $config["jwt"]["privateKey"]);
+            AuthTokenCoderServiceInterface::class => function() use ($config) {
+                return new AuthTokenCoderService(new JWT, $config["jwt"]["privateKey"]);
             },
 
             UsersRepositoryInterface::class => function() {

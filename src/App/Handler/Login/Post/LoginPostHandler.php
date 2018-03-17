@@ -5,11 +5,11 @@ namespace Realworld\App\Handler\Login\Post;
 use Fig\Http\Message\StatusCodeInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Realworld\App\Authentication\AuthToken;
-use Realworld\App\Authentication\TokenService;
+use Realworld\Domain\Model\UserAuthToken;
+use Realworld\Infrastructure\Service\AuthTokenCoderService;
 use Realworld\App\Common\ResponseDto\AuthenticatedUserResponseDto;
 use Realworld\App\Handler\HandlerInterface;
-use Realworld\Domain\Service\User\AuthenticateUserByPasswordService;
+use Realworld\Domain\Service\AuthenticateUserByPasswordService;
 
 /**
  * Handles POST request to /api/users/login
@@ -22,17 +22,17 @@ class LoginPostHandler implements HandlerInterface
     private $service;
 
     /**
-     * @var TokenService
+     * @var AuthTokenCoderService
      */
     private $tokenService;
 
     /**
      * @param AuthenticateUserByPasswordService $service
-     * @param TokenService $tokenService
+     * @param AuthTokenCoderService $tokenService
      */
     public function __construct(
         AuthenticateUserByPasswordService $service,
-        TokenService $tokenService
+        AuthTokenCoderService $tokenService
     ) {
         $this->service = $service;
         $this->tokenService = $tokenService;
@@ -58,7 +58,7 @@ class LoginPostHandler implements HandlerInterface
         }
 
         $user = $this->service->authenticate($requestDto->email, $requestDto->password);
-        $token = $this->tokenService->encode(AuthToken::create($user));
+        $token = $this->tokenService->encode(UserAuthToken::create($user));
 
         $response = (new ResponseDto(AuthenticatedUserResponseDto::create($user, $token)))->writeTo($response);
 

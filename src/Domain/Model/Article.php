@@ -25,12 +25,13 @@ class Article
     /**
      * @var string
      */
-    public $decription;
+    public $description;
 
     /**
      * @var string
      */
     public $body;
+
     /**
      * @var Tag[]
      */

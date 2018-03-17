@@ -1,13 +1,13 @@
 <?php
 
-namespace  Realworld\App\Authentication;
+namespace  Realworld\Domain\Model;
 
 use Realworld\Domain\Model\User;
 
 /**
  * Data for authentication token
  */
-class AuthToken
+class UserAuthToken
 {
     /**
      * @var string
@@ -31,7 +31,7 @@ class AuthToken
 
     /**
      * @param User $user
-     * @return AuthToken
+     * @return UserAuthToken
      */
     public static function create(User $user): self
     {

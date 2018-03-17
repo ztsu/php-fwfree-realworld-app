@@ -1,10 +1,10 @@
 <?php
 
-namespace Realworld\Domain\Service\User;
+namespace Realworld\Domain\Service;
 
 use Realworld\Domain\Model\User;
 use Realworld\Domain\Repository\UsersRepositoryInterface;
-use Realworld\Domain\Service\User\WrongPasswordException;
+use Realworld\Domain\Exception\WrongPasswordException;
 
 class AuthenticateUserByPasswordService
 {

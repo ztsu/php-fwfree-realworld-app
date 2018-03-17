@@ -4,8 +4,8 @@ namespace Realworld\App\Handler\User\Get;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Realworld\App\Authentication\AuthToken;
-use Realworld\App\Authentication\TokenService;
+use Realworld\Domain\Model\UserAuthToken;
+use Realworld\Infrastructure\Service\AuthTokenCoderService;
 use Realworld\App\Common\ResponseDto\AuthenticatedUserResponseDto;
 use Realworld\App\Handler\Exception\BadRequestException;
 use Realworld\App\Handler\Exception\UnauthorizedRequestException;
@@ -19,7 +19,7 @@ use Realworld\Domain\Repository\UsersRepositoryInterface;
 class UserGetHandler implements HandlerInterface
 {
     /**
-     * @var TokenService
+     * @var AuthTokenCoderService
      */
     private $tokenService;
 
@@ -29,9 +29,9 @@ class UserGetHandler implements HandlerInterface
     private $users;
 
     /**
-     * @param TokenService $tokenService
+     * @param AuthTokenCoderService $tokenService
      */
-    public function __construct(TokenService $tokenService, UsersRepositoryInterface $users)
+    public function __construct(AuthTokenCoderService $tokenService, UsersRepositoryInterface $users)
     {
         $this->tokenService = $tokenService;
         $this->users = $users;
@@ -47,7 +47,7 @@ class UserGetHandler implements HandlerInterface
     public function handle(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         /**
-         * @var $encodedToken AuthToken
+         * @var $encodedToken UserAuthToken
          */
         $token = $request->getAttribute(AuthMiddleware::ATTR_NAME);
         if ($token == null) {

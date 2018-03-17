@@ -3,6 +3,7 @@
 namespace Realworld\Domain\Model;
 
 use PHPUnit\Framework\TestCase;
+use Realworld\Domain\Model\User;
 
 class UserTest extends TestCase
 {

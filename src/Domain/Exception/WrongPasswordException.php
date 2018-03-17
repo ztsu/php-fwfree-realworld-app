@@ -1,8 +1,6 @@
 <?php
 
-namespace Realworld\Domain\Service\User;
-
-use Realworld\Domain\Exception\DomainExceptionInterface;
+namespace Realworld\Domain\Exception;
 
 class WrongPasswordException extends \DomainException implements DomainExceptionInterface
 {

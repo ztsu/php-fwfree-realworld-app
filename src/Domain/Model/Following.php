@@ -2,6 +2,8 @@
 
 namespace Realworld\Domain\Model;
 
+use Realworld\Domain\Model\User;
+
 /**
  * Following
  */

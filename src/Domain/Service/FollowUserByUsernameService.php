@@ -1,6 +1,6 @@
 <?php
 
-namespace Realworld\Domain\Service\User;
+namespace Realworld\Domain\Service;
 
 use Realworld\Domain\Model\Following;
 use Realworld\Domain\Repository\FollowingsRepositoryInterface;

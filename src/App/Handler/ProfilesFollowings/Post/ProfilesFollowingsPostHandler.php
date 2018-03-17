@@ -4,13 +4,13 @@ namespace Realworld\App\Handler\ProfilesFollowings\Post;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Realworld\App\Authentication\AuthToken;
+use Realworld\Domain\Model\UserAuthToken;
 use Realworld\App\Common\ResponseDto\ProfileResponseDto;
 use Realworld\App\Handler\Exception\UnauthorizedRequestException;
 use Realworld\App\Handler\HandlerInterface;
 use Realworld\App\Middleware\AuthMiddleware;
 use Realworld\Domain\Repository\UsersRepositoryInterface;
-use Realworld\Domain\Service\User\FollowUserByUsernameService;
+use Realworld\Domain\Service\FollowUserByUsernameService;
 
 /**
  * Handles POST /api/profiles/:username/follow
@@ -44,7 +44,7 @@ class ProfilesFollowingsPostHandler implements HandlerInterface
     public function handle(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         /**
-         * @var $encodedToken AuthToken
+         * @var $encodedToken UserAuthToken
          */
         $token = $request->getAttribute(AuthMiddleware::ATTR_NAME);
         if ($token == null) {

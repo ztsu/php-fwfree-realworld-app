@@ -1,8 +1,6 @@
 <?php
 
-namespace Realworld\Domain\Exception\User;
-
-use Realworld\Domain\Exception\DomainExceptionInterface;
+namespace Realworld\Domain\Exception;
 
 class FollowingNotFoundException extends \DomainException implements DomainExceptionInterface
 {

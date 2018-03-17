@@ -6,7 +6,7 @@ use League\Container\Container;
 use PHPUnit\Framework\TestCase;
 use Realworld\App\Handler\HandlerFactory;
 use Realworld\Domain\Repository\UsersRepositoryInterface;
-use Realworld\Domain\Service\User\AuthenticateUserByPasswordService;
+use Realworld\Domain\Service\AuthenticateUserByPasswordService;
 use Zend\Diactoros\Response\SapiEmitter;
 
 class ServiceProviderTest extends TestCase

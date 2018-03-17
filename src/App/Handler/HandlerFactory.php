@@ -4,7 +4,7 @@ namespace Realworld\App\Handler;
 
 use League\Container\Container;
 use Psr\Container\ContainerInterface;
-use Realworld\App\Authentication\TokenService;
+use Realworld\Infrastructure\Service\AuthTokenCoderService;
 use Realworld\App\Handler\Login\Post\LoginPostHandler;
 use Realworld\App\Handler\Profiles\ProfilesGetHandler;
 use Realworld\App\Handler\ProfilesFollowings\Delete\ProfilesFollowingsDeleteHandler;
@@ -13,10 +13,10 @@ use Realworld\App\Handler\User\Get\UserGetHandler;
 use Realworld\App\Handler\User\Put\UserPutHandler;
 use Realworld\App\Handler\Users\Post\UsersPostHandler;
 use Realworld\Domain\Repository\UsersRepositoryInterface;
-use Realworld\Domain\Service\User\AuthenticateUserByPasswordService;
-use Realworld\Domain\Service\User\CheckUserFollowedByUserService;
-use Realworld\Domain\Service\User\CreateUserService;
-use Realworld\Domain\Service\User\FollowUserByUsernameService;
+use Realworld\Domain\Service\AuthenticateUserByPasswordService;
+use Realworld\Domain\Service\CheckUserFollowedByUserService;
+use Realworld\Domain\Service\CreateUserService;
+use Realworld\Domain\Service\FollowUserByUsernameService;
 
 /**
  * Handler factory
@@ -42,7 +42,7 @@ class HandlerFactory
             function () use ($services) {
                 return new LoginPostHandler(
                     $services->get(AuthenticateUserByPasswordService::class),
-                    $services->get(TokenService::class)
+                    $services->get(AuthTokenCoderService::class)
                 );
             }
         );
@@ -52,7 +52,7 @@ class HandlerFactory
             function() use ($services) {
                 return new UsersPostHandler(
                     $services->get(CreateUserService::class),
-                    $services->get(TokenService::class)
+                    $services->get(AuthTokenCoderService::class)
                 );
             }
         );
@@ -61,7 +61,7 @@ class HandlerFactory
             UserGetHandler::class,
             function() use ($services) {
                 return new UserGetHandler(
-                    $services->get(TokenService::class),
+                    $services->get(AuthTokenCoderService::class),
                     $services->get(UsersRepositoryInterface::class)
                 );
             }

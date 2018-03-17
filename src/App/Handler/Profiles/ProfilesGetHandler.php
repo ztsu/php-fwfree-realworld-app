@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Realworld\App\Common\ResponseDto\ProfileResponseDto;
 use Realworld\App\Handler\HandlerInterface;
 use Realworld\Domain\Exception\DomainExceptionInterface;
-use Realworld\Domain\Service\User\CheckUserFollowedByUserService;
+use Realworld\Domain\Service\CheckUserFollowedByUserService;
 
 /**
  * Handles GET /api/profiles/:username

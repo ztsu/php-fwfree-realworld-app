@@ -2,6 +2,7 @@
 
 namespace Realworld\Domain\Model;
 
+use Realworld\Domain\Model\Following;
 use Realworld\Domain\Exception\InvalidArgumentException;
 
 /**
@@ -61,14 +62,14 @@ class User
     /**
      * @param string $name
      * @param string $email
-     * @param string $password
+     * @param string $passwordHash
      * @param string $bio
      * @param string $image
      * @return User
      */
-    public static function create(string $name, string $email, string $password, string $bio = "", string $image = ""): self
+    public static function create(string $name, string $email, string $passwordHash, string $bio = "", string $image = ""): self
     {
-        return new self(0, $name, $email, self::hashPassword($password), $bio, $image);
+        return new self(0, $name, $email, $passwordHash, $bio, $image);
     }
 
     /**
